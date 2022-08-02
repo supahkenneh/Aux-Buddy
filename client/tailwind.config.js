@@ -7,8 +7,8 @@ module.exports = {
         'main': ['Secular One', 'sans-serif']
       },
       colors: {
-        'dark': '#121212',
-        'accent-green': '#1dd65f'
+        'spotify-dark': '#191414',
+        'spotify-green': '#1DB954'
       }
     },
   },

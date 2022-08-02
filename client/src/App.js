@@ -1,7 +1,6 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
-import { catchErrors } from "./utils";
+import { catchErrors } from './utils';
 import './App.css';
 import { Header } from './Components/Header';
 
@@ -10,37 +9,24 @@ function App() {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    setToken(accessToken)
+    setToken(accessToken);
 
     const fetchData = async () => {
       const { data } = await getCurrentUserProfile();
       setProfile(data);
       console.log(data);
-    }
+    };
 
     catchErrors(fetchData());
   }, []);
 
   return (
-    <div className="App">
-      <Header name={profile && profile.display_name ? profile.display_name : null} />
-      {!token ? (
-        ''
-      ) : (
-        <>
-          <h1>Logged in!</h1>
-          <button onClick={logout}>Log Out</button>
-          {profile && (
-            <div>
-              <h1>{profile.display_name}</h1>
-              <p>{profile.followers.total} Followers</p>
-              {profile.images.length && profile.images[0].url && (
-                <img src={profile.images[0].url} alt="avatar" />
-              )}
-            </div>
-          )}
-        </>
-      )}
+    <div className='App h-screen bg-gradient-to-r from-sky-500 to-indigo-500'>
+      <Header
+        name={profile && profile.display_name ? profile.display_name : null}
+        handleLogout={logout}
+      />
+      {!token ? '' : <>{/* content goes here */}</>}
     </div>
   );
 }
