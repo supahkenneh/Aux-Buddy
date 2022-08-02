@@ -35,7 +35,6 @@ app.get('/login', (req, res) => {
 
 app.get('/callback', (req, res) => {
     const code = req.query.code || null;
-    console.log(code);
     axios({
         method: 'post',
         url: 'https://accounts.spotify.com/api/token',
@@ -51,8 +50,12 @@ app.get('/callback', (req, res) => {
     })
         .then(response => {
             if (response.status === 200) {
-                const { access_token, token_type } = response.data;
-                const { refresh_token } = response.data;
+                const { access_token, refresh_token } = response.data;
+                // pass tokens in query params
+                const queryParams = new URLSearchParams({ access_token, refresh_token });
+
+                // redirect to react app
+                res.redirect(`http://localhost:3000/?${queryParams}`);
                 // axios.get('https://api.spotify.com/v1/me', {
                 //     headers: {
                 //         Authorization: `${token_type} ${access_token}`
@@ -64,15 +67,8 @@ app.get('/callback', (req, res) => {
                 //     .catch(error => {
                 //         res.send(error);
                 //     })
-                axios.get(`http://localhost:8888/refresh_token?refresh_token=${refresh_token}`)
-                    .then(response => {
-                        res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`)
-                    })
-                    .catch(error => {
-                        res.send(error);
-                    })
             } else {
-                res.send(response);
+                res.redirect(`/?${new URLSearchParams({ error: 'invalid_token' })}`);
             }
         })
         .catch(error => {
