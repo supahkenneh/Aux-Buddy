@@ -2,6 +2,7 @@ require('dotenv').config();
 const { generateRandomString } = require('./helpers/helpers');
 const axios = require('axios');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
 /* Environment variables */
@@ -10,6 +11,8 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 
 const stateKey = 'spotify_auth_state';
+
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('hello world');
@@ -50,9 +53,13 @@ app.get('/callback', (req, res) => {
     })
         .then(response => {
             if (response.status === 200) {
-                const { access_token, refresh_token } = response.data;
+                const { access_token, refresh_token, expires_in } = response.data;
                 // pass tokens in query params
-                const queryParams = new URLSearchParams({ access_token, refresh_token });
+                const queryParams = new URLSearchParams({
+                    access_token,
+                    refresh_token,
+                    expires_in
+                });
 
                 // redirect to react app
                 res.redirect(`http://localhost:3000/?${queryParams}`);
@@ -72,7 +79,6 @@ app.get('/callback', (req, res) => {
             }
         })
         .catch(error => {
-            console.log(error);
             res.send(error);
         })
 });

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from "./utils";
@@ -18,17 +19,13 @@ function App() {
     }
 
     catchErrors(fetchData());
-  }, [])
+  }, []);
+
   return (
     <div className="App">
       <Header />
       {!token ? (
-        <a
-          className="App-link"
-          href="http://localhost:8888/login"
-        >
-          Log in to Spotify
-        </a>
+        ''
       ) : (
         <>
           <h1>Logged in!</h1>
