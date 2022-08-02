@@ -23,14 +23,13 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header name={profile && profile.display_name ? profile.display_name : null} />
       {!token ? (
         ''
       ) : (
         <>
           <h1>Logged in!</h1>
           <button onClick={logout}>Log Out</button>
-
           {profile && (
             <div>
               <h1>{profile.display_name}</h1>
