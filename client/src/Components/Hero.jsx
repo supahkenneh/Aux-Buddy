@@ -1,3 +1,5 @@
+import { DebounceInput } from 'react-debounce-input';
+
 export const Hero = ({ name, handleLogout, handleInput }) => {
   return (
     <header className='bg-gradient-to-r from-sky-500 to-indigo-500 h-2/5'>
@@ -23,7 +25,17 @@ export const Hero = ({ name, handleLogout, handleInput }) => {
               Search on artists or tracks to start curating a playlist fit for
               all!
             </div>
-            <input type='text' className='text-black rounded h-1/4 text-lg p-2 font-sans' onChange={handleInput} />
+            <DebounceInput
+              minLength={2}
+              debounceTimeout={300}
+              onChange={handleInput}
+              className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg'
+            />
+            {/* <input
+              type='text'
+              className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg'
+              onChange={handleInput}
+            /> */}
           </div>
         ) : (
           <></>

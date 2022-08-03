@@ -8,6 +8,7 @@ import {
 import { catchErrors } from './utils';
 import './App.css';
 import { Hero } from './Components/Hero';
+import { ArtistList } from './Components/ArtistList';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -29,17 +30,22 @@ function App() {
   const fetchSearch = async (e) => {
     const { data } = await fetchSearchData(e.target.value);
     setSearchData(data);
-    console.log(searchData);
   };
 
   return (
-    <div className='App h-screen'>
+    <div className='App h-screen bg-spotify-dark'>
       <Hero
         name={profile && profile.display_name ? profile.display_name : null}
         handleLogout={logout}
         handleInput={fetchSearch}
       />
-      {!token ? '' : <>{/* content goes here */}</>}
+      {!token ? (
+        ''
+      ) : (
+        <div className='p-5 w-vw'>
+          <ArtistList artists={searchData?.artists?.items} />
+        </div>
+      )}
     </div>
   );
 }
