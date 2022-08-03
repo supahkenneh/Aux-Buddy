@@ -4,6 +4,7 @@ import {
   logout,
   getCurrentUserProfile,
   fetchSearchData,
+  paginateFetch,
 } from './spotify';
 import { catchErrors } from './utils';
 import './App.css';
@@ -21,7 +22,6 @@ function App() {
     const fetchData = async () => {
       const { data } = await getCurrentUserProfile();
       setProfile(data);
-      console.log(data);
     };
 
     catchErrors(fetchData());
@@ -29,6 +29,13 @@ function App() {
 
   const fetchSearch = async (e) => {
     const { data } = await fetchSearchData(e.target.value);
+    setSearchData(data);
+  };
+
+  const paginate = async (direction) => {
+    const { data } = await paginateFetch(
+      direction === 'next' ? searchData.artists.next : searchData.artists.previous
+    );
     setSearchData(data);
   };
 
@@ -43,7 +50,11 @@ function App() {
         ''
       ) : (
         <div className='p-5 w-vw'>
-          <ArtistList artists={searchData?.artists?.items} />
+          <ArtistList
+            artists={searchData?.artists?.items}
+            handlePrev={() => paginate('prev')}
+            handleNext={() => paginate('next')}
+          />
         </div>
       )}
     </div>

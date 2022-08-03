@@ -98,3 +98,7 @@ export const fetchSearchData = async (searchStr) => {
     });
     return await axios.get(`/search/?${queryParams}`);
 }
+
+export const paginateFetch = async (searchUrl) => {
+    return await axios.get(`${searchUrl}`);
+}
