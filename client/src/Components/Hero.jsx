@@ -1,4 +1,4 @@
-export const Hero = ({ name, handleLogout }) => {
+export const Hero = ({ name, handleLogout, handleInput }) => {
   return (
     <header className='bg-gradient-to-r from-sky-500 to-indigo-500 h-2/5'>
       <div className='flex p-4 w-vw drop-shadow-lg'>
@@ -15,15 +15,15 @@ export const Hero = ({ name, handleLogout }) => {
           )}
         </div>
       </div>
-      <div className='flex justify-center'>
+      <div className='flex justify-center h-3/5'>
         {name ? (
           <div className='flex flex-col justify-center content-center'>
             <h1 className='text-2xl font-main self-center'>Hello {name}!</h1>
-            <div className='text-xl'>
+            <div className='text-xl mb-3'>
               Search on artists or tracks to start curating a playlist fit for
               all!
             </div>
-            <input type='text' className='text-black rounded' />
+            <input type='text' className='text-black rounded h-1/4 text-lg p-2 font-sans' onChange={handleInput} />
           </div>
         ) : (
           <></>

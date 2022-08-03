@@ -103,7 +103,7 @@ app.get('/refresh_token', (req, res) => {
         .catch(error => {
             res.send(error);
         })
-})
+});
 
 const port = process.env.PORT || 8888;
 
