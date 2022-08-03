@@ -4,6 +4,6 @@
 
 @layer components {
   .btn-green {
-    @apply text-white font-bold w-1/5 p-2 rounded-full text-center bg-spotify-green shadow-inner;
+    @apply font-bold w-1/6 p-2 rounded-full text-center bg-spotify-green shadow-inner;
   }
 }

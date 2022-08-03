@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'main': ['Secular One', 'sans-serif']
+        'main': ['Rubik', 'sans-serif']
       },
       colors: {
         'spotify-dark': '#191414',

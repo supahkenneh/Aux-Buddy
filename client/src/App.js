@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
 import './App.css';
-import { Header } from './Components/Header';
+import { Hero } from './Components/Hero';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -21,8 +21,8 @@ function App() {
   }, []);
 
   return (
-    <div className='App h-screen bg-gradient-to-r from-sky-500 to-indigo-500'>
-      <Header
+    <div className='App h-screen'>
+      <Hero
         name={profile && profile.display_name ? profile.display_name : null}
         handleLogout={logout}
       />
