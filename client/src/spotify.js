@@ -93,7 +93,7 @@ export const getCurrentUserProfile = () => axios.get('/me');
 export const fetchSearchData = async (searchStr) => {
     if (!searchStr)
         return { data: null };
-        
+
     const queryParams = new URLSearchParams({
         q: searchStr,
         type: 'artist',
@@ -104,4 +104,53 @@ export const fetchSearchData = async (searchStr) => {
 
 export const paginateFetch = async (searchUrl) => {
     return await axios.get(`${searchUrl}`);
+}
+
+export const composePlaylist = async (artists, user) => {
+    // get tracks for selected artists
+    const tracks = await Promise.all(
+        artists.map(async (artist) => {
+            const queryParams = new URLSearchParams({
+                id: artist.id,
+                market: 'US'
+            });
+            const { data } = await axios.get(`/artists/${artist.id}/top-tracks?${queryParams}`);
+            return data;
+        })
+    )
+    if (tracks?.length) {
+        console.log(tracks);
+        // create playlist
+        const { data } = await axios({
+            method: 'post',
+            url: `/users/${user}/playlists`,
+            data: JSON.stringify({
+                name: 'test',
+                description: 'Created with Aux Buddy',
+                public: false
+            })
+        });
+        // use playlist id to add tracks
+        if (data?.id) {
+            // get all uris
+            let tracksUri = '';
+            tracks.map(trackGrp => {
+                return trackGrp.tracks.map(track => {
+                    return tracksUri += track.uri + ',';
+                });
+            });
+            tracksUri = tracksUri.substring(0, tracksUri.length - 1);
+            const queryParams = new URLSearchParams({
+                uri: tracksUri
+            });
+            const response = await axios({
+                method: 'post',
+                url: `/playlists/${data.id}/tracks?${queryParams}`,
+                data: JSON.stringify({
+                    uris: tracksUri.split(',')
+                })
+            });
+            return response.data;
+        }
+    }
 }

@@ -5,6 +5,7 @@ import {
   getCurrentUserProfile,
   fetchSearchData,
   paginateFetch,
+  composePlaylist,
 } from './spotify';
 import { catchErrors } from './utils';
 import './App.css';
@@ -44,7 +45,7 @@ function App() {
   };
 
   const generatePlaylist = async () => {
-    console.log(state);
+    const { data } = await composePlaylist(state.artists, profile.id);
   }
 
   return (
