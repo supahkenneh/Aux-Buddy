@@ -9,10 +9,11 @@ export const Card = ({ artist }) => {
       })
     : '';
 
-  const { dispatch } = useContext(ArtistListContext);
+  const { state, dispatch } = useContext(ArtistListContext);
 
   const addArtist = (artist) => {
-    dispatch({ type: 'ADD_ARTIST', data: artist });
+    if (state.artists.indexOf(artist) === -1)
+      dispatch({ type: 'ADD_ARTIST', data: artist });
   };
 
   return (

@@ -32,12 +32,12 @@ export const Hero = ({ name, handleLogout, handleInput }) => {
               onChange={handleInput}
               className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg'
             />
-            <SelectedArtists />
           </div>
         ) : (
           <></>
         )}
       </div>
+      {name ? <SelectedArtists /> : <></>}
     </header>
   );
 };
