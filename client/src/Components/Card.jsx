@@ -1,4 +1,6 @@
 import user from '../assets/user.png';
+import { useContext } from 'react';
+import { ArtistListContext } from '../context';
 
 export const Card = ({ artist }) => {
   const displayImg = artist.images.length
@@ -6,6 +8,12 @@ export const Card = ({ artist }) => {
         return img.height === 160;
       })
     : '';
+
+  const { dispatch } = useContext(ArtistListContext);
+
+  const addArtist = (artist) => {
+    dispatch({ type: 'ADD_ARTIST', data: artist });
+  };
 
   return (
     <div className='bg-spotify-card font-main text-2xl flex rounded-lg drop-shadow-lg hover:cursor-pointer'>
@@ -16,7 +24,10 @@ export const Card = ({ artist }) => {
           className='rounded-l-lg'
         />
       </div>
-      <div className='flex justify-center flex-col text-center hover:underline'>
+      <div
+        className='flex justify-center flex-col text-center hover:underline'
+        onClick={() => addArtist(artist)}
+      >
         <div>{artist.name}</div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import {
   accessToken,
   logout,
@@ -10,11 +10,13 @@ import { catchErrors } from './utils';
 import './App.css';
 import { Hero } from './Components/Hero';
 import { ArtistList } from './Components/ArtistList';
+import { ArtistListContext, initialState, reducer } from './context';
 
 function App() {
   const [token, setToken] = useState(null);
   const [profile, setProfile] = useState(null);
   const [searchData, setSearchData] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     setToken(accessToken);
@@ -34,29 +36,33 @@ function App() {
 
   const paginate = async (direction) => {
     const { data } = await paginateFetch(
-      direction === 'next' ? searchData.artists.next : searchData.artists.previous
+      direction === 'next'
+        ? searchData.artists.next
+        : searchData.artists.previous
     );
     setSearchData(data);
   };
 
   return (
     <div className='App h-screen bg-spotify-dark'>
-      <Hero
-        name={profile && profile.display_name ? profile.display_name : null}
-        handleLogout={logout}
-        handleInput={fetchSearch}
-      />
-      {!token ? (
-        ''
-      ) : (
-        <div className='p-5 w-vw'>
-          <ArtistList
-            artists={searchData?.artists?.items}
-            handlePrev={() => paginate('prev')}
-            handleNext={() => paginate('next')}
-          />
-        </div>
-      )}
+      <ArtistListContext.Provider value={{ state, dispatch }}>
+        <Hero
+          name={profile && profile.display_name ? profile.display_name : null}
+          handleLogout={logout}
+          handleInput={fetchSearch}
+        />
+        {!token ? (
+          ''
+        ) : (
+          <div className='p-5 w-vw'>
+            <ArtistList
+              artists={searchData?.artists?.items}
+              handlePrev={() => paginate('prev')}
+              handleNext={() => paginate('next')}
+            />
+          </div>
+        )}
+      </ArtistListContext.Provider>
     </div>
   );
 }

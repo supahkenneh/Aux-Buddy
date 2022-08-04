@@ -1,4 +1,5 @@
 import { DebounceInput } from 'react-debounce-input';
+import { SelectedArtists } from './SelectedArtists';
 
 export const Hero = ({ name, handleLogout, handleInput }) => {
   return (
@@ -31,11 +32,7 @@ export const Hero = ({ name, handleLogout, handleInput }) => {
               onChange={handleInput}
               className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg'
             />
-            {/* <input
-              type='text'
-              className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg'
-              onChange={handleInput}
-            /> */}
+            <SelectedArtists />
           </div>
         ) : (
           <></>
