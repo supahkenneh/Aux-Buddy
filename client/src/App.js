@@ -43,6 +43,10 @@ function App() {
     setSearchData(data);
   };
 
+  const generatePlaylist = async () => {
+    console.log(state);
+  }
+
   return (
     <div className='App h-screen bg-spotify-dark'>
       <ArtistListContext.Provider value={{ state, dispatch }}>
@@ -50,6 +54,7 @@ function App() {
           name={profile && profile.display_name ? profile.display_name : null}
           handleLogout={logout}
           handleInput={fetchSearch}
+          handleGenPlaylist={generatePlaylist}
         />
         {!token ? (
           ''

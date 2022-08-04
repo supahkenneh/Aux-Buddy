@@ -17,7 +17,10 @@ export const Card = ({ artist }) => {
   };
 
   return (
-    <div className='bg-spotify-card font-main text-2xl flex rounded-lg drop-shadow-lg hover:cursor-pointer'>
+    <div
+      className='bg-spotify-card font-main text-2xl flex rounded-lg drop-shadow-lg hover:cursor-pointer hover:underline'
+      onClick={() => addArtist(artist)}
+    >
       <div className='w-1/2 flex justify-start'>
         <img
           src={displayImg?.url ? displayImg.url : user}
@@ -25,10 +28,7 @@ export const Card = ({ artist }) => {
           className='rounded-l-lg'
         />
       </div>
-      <div
-        className='flex justify-center flex-col text-center hover:underline'
-        onClick={() => addArtist(artist)}
-      >
+      <div className='flex justify-center flex-col text-center'>
         <div>{artist.name}</div>
       </div>
     </div>

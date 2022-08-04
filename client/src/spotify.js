@@ -91,6 +91,9 @@ axios.defaults.headers['Content-Type'] = 'application/json';
 export const getCurrentUserProfile = () => axios.get('/me');
 
 export const fetchSearchData = async (searchStr) => {
+    if (!searchStr)
+        return { data: null };
+        
     const queryParams = new URLSearchParams({
         q: searchStr,
         type: 'artist',
