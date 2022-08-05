@@ -31,11 +31,15 @@ export const Modal = ({ playlist, user }) => {
           <div className='hover:cursor-pointer'>⛌</div>
         </div>
         <div className='flex'>
-          <ModalHeader playlist={playlist} userProfile={user} />
+          <ModalHeader
+            playlist={playlist}
+            userProfile={user}
+            playlistChanged={() => getSongs()}
+          />
           <ModalContent
             songs={songs}
             playlistId={playlist.id}
-            trackDeleted={() => getSongs()}
+            playlistChanged={() => getSongs()}
           />
         </div>
       </div>

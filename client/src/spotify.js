@@ -89,13 +89,13 @@ axios.defaults.headers['Content-Type'] = 'application/json';
 
 export const getCurrentUserProfile = () => axios.get('/me');
 
-export const fetchSearchData = async (searchStr) => {
+export const fetchSearchData = async (searchStr, type) => {
     if (!searchStr)
         return { data: null };
 
     const queryParams = new URLSearchParams({
         q: searchStr,
-        type: 'artist',
+        type: type,
         limit: 10
     });
     return await axios.get(`/search/?${queryParams}`);
@@ -172,4 +172,18 @@ export const removeSongFromPlaylist = async (playlistId, track) => {
             tracks: [{ uri: track.uri }]
         })
     });
+}
+
+export const addSongToPlaylist = async (playlistId, track) => {
+    const queryParams = new URLSearchParams({
+        uris: track.uri,
+        position: 0
+    })
+    return await axios({
+        method: 'post',
+        url: `/playlists/${playlistId}/tracks?${queryParams}`,
+        data: JSON.stringify({
+            uris: [track.uri]
+        })
+    })
 }

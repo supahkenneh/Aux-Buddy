@@ -1,7 +1,18 @@
+import { useState } from 'react';
 import { DebounceInput } from 'react-debounce-input';
+import { fetchSearchData } from '../spotify';
+import { SongResults } from './SongResults';
 
-export const ModalHeader = ({ playlist, userProfile }) => {
-  const fetchSongs = () => {};
+export const ModalHeader = ({ playlist, userProfile, playlistChanged }) => {
+  const [searchData, setSearchData] = useState(null);
+
+  const fetchSongs = async (e) => {
+    if (!e) setSearchData(null);
+    else {
+      const { data } = await fetchSearchData(e.target.value, 'track');
+      setSearchData(data);
+    }
+  };
 
   return (
     <div className='flex flex-col justify-center h-1/2 w-1/2'>
@@ -21,11 +32,18 @@ export const ModalHeader = ({ playlist, userProfile }) => {
         </div>
         <div>
           <DebounceInput
-            minLength={2}
-            debounceTimeout={300}
+            minLength={3}
+            debounceTimeout={500}
             onChange={fetchSongs}
             className='w-2/3 text-black text-lg font-sans drop-shadow-lg rounded p-2'
             placeholder='Search songs'
+          />
+        </div>
+        <div>
+          <SongResults
+            data={searchData}
+            playlist={playlist}
+            playlistChanged={playlistChanged}
           />
         </div>
       </div>

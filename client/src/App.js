@@ -36,7 +36,7 @@ function App() {
   const fetchSearch = async (e) => {
     if (!e) setSearchData(null);
     else {
-      const { data } = await fetchSearchData(e.target.value);
+      const { data } = await fetchSearchData(e.target.value, 'artist');
       setSearchData(data);
     }
   };
