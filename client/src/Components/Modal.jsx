@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { catchErrors } from '../utils';
 
 export const Modal = ({ playlist, user }) => {
-  const [songs, setSongs] = useState([]);
+  const [songs, setSongs] = useState();
 
   useEffect(() => {
     const fetchPlaylistSongs = async () => {
@@ -16,15 +16,27 @@ export const Modal = ({ playlist, user }) => {
     catchErrors(fetchPlaylistSongs());
   }, [playlist.id]);
 
+  const getSongs = async () => {
+    const fetchPlaylistSongs = async () => {
+      const { data } = await getPlaylistSongs(playlist.id);
+      setSongs(data.tracks.items);
+    };
+    catchErrors(fetchPlaylistSongs());
+  };
+
   return (
     <div className='fixed top-0 left-0 z-10 w-screen h-screen bg-spotify-dark/75 flex justify-center'>
-      <div className='bg-spotify-dark p-5 w-4/5 h-4/5 self-center rounded-lg drop-shadow-lg border-spotify-dark'>
-        <div className='h-1/5 flex justify-end text-xl'>
+      <div className='bg-spotify-dark p-5 w-4/5 h-4/5 self-center rounded-lg drop-shadow-lg border-spotify-dark overflow-auto'>
+        <div className='h-1/8 flex justify-end text-xl'>
           <div className='hover:cursor-pointer'>⛌</div>
         </div>
-        <div className='grid grid-cols-2'>
+        <div className='flex'>
           <ModalHeader playlist={playlist} userProfile={user} />
-          <ModalContent songs={songs} />
+          <ModalContent
+            songs={songs}
+            playlistId={playlist.id}
+            trackDeleted={() => getSongs()}
+          />
         </div>
       </div>
     </div>

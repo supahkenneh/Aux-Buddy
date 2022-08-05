@@ -163,3 +163,13 @@ export const getPlaylistSongs = async (id) => {
     })
     return await axios.get(`/playlists/${id}?${queryParams}`);
 }
+
+export const removeSongFromPlaylist = async (playlistId, track) => {
+    return await axios({
+        method: 'delete',
+        url: `/playlists/${playlistId}/tracks`,
+        data: JSON.stringify({
+            tracks: [{ uri: track.uri }]
+        })
+    });
+}
