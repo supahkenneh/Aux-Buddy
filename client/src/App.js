@@ -10,7 +10,8 @@ import {
 import { catchErrors } from './utils';
 import './App.css';
 import { Hero } from './Components/Hero';
-import { ArtistList } from './Components/ArtistList';
+import { Content } from './Components/Content';
+import { Modal } from './Components/Modal';
 import { ArtistListContext, initialState, reducer } from './context';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   const [profile, setProfile] = useState(null);
   const [searchData, setSearchData] = useState(null);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [playlist, setPlaylist] = useState('');
 
   useEffect(() => {
     setToken(accessToken);
@@ -55,7 +57,7 @@ function App() {
       user: profile.id,
       playlistName: playlistName,
     });
-    console.log(response);
+    setPlaylist(response);
   };
 
   return (
@@ -65,6 +67,7 @@ function App() {
           ''
         ) : (
           <>
+            {!playlist ? <Modal playlist={playlist} user={profile} /> : ''}
             <Hero
               name={
                 profile && profile.display_name ? profile.display_name : null
@@ -76,7 +79,7 @@ function App() {
               }
             />
             <div className='p-5 w-vw'>
-              <ArtistList
+              <Content
                 artists={searchData?.artists?.items}
                 handlePrev={() => paginate('prev')}
                 handleNext={() => paginate('next')}

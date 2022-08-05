@@ -130,7 +130,7 @@ export const composePlaylist = async ({ artists, user, playlistName }) => {
             })
         });
 
-        const playListLink = data?.external_urls?.spotify;
+        const playlistData = data;
         // use playlist id to add tracks
         if (data?.id) {
             // get all uris
@@ -152,8 +152,12 @@ export const composePlaylist = async ({ artists, user, playlistName }) => {
                 })
             });
             if (response) {
-                return playListLink;
+                return playlistData;
             }
         }
     }
+}
+
+export const getPlaylistSongs = async (id) => {
+
 }

@@ -84,7 +84,7 @@ export const Hero = ({
               setToggleForm(!toggleForm);
             }}
           >
-            {!toggleForm ? "I've selected my artists!" : 'Need more artists!'}
+            {!toggleForm ? "I've selected my artists!" : 'I want to add more artists!'}
           </button>
         </div>
       ) : (

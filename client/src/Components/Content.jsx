@@ -1,6 +1,6 @@
 import { Card } from './Card';
 
-export const ArtistList = ({ artists, handlePrev, handleNext }) => {
+export const Content = ({ artists, handlePrev, handleNext }) => {
   return (
     <>
       <div className='grid grid-cols-5 gap-4'>
