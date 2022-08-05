@@ -12,9 +12,9 @@ export const SelectedArtists = ({ formState }) => {
             key={artist.id}
             artist={artist}
             formState={formState}
-            handleRemove={() =>
-              dispatch({ type: 'REMOVE_ARTIST', data: artist })
-            }
+            handleRemove={() => {
+              if (!formState) dispatch({ type: 'REMOVE_ARTIST', data: artist });
+            }}
           />
         );
       })}

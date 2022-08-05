@@ -31,8 +31,11 @@ function App() {
   }, []);
 
   const fetchSearch = async (e) => {
-    const { data } = await fetchSearchData(e.target.value);
-    setSearchData(data);
+    if (!e) setSearchData(null);
+    else {
+      const { data } = await fetchSearchData(e.target.value);
+      setSearchData(data);
+    }
   };
 
   const paginate = async (direction) => {
@@ -45,6 +48,8 @@ function App() {
   };
 
   const generatePlaylist = async (playlistName) => {
+    if (!playlistName.length) playlistName = 'The Awesome Playlist';
+
     const response = await composePlaylist({
       artists: state.artists,
       user: profile.id,
