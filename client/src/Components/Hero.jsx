@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { ArtistListContext } from '../context';
 import { SelectedArtists } from './SelectedArtists';
@@ -10,6 +10,8 @@ export const Hero = ({
   handleGenPlaylist,
 }) => {
   const { state } = useContext(ArtistListContext);
+  const [toggleForm, setToggleForm] = useState(false);
+  const [playlistName, setPlaylistName] = useState('');
 
   return (
     <header className='bg-gradient-to-r from-sky-500 to-indigo-500 h-1/2 p-4'>
@@ -32,15 +34,24 @@ export const Hero = ({
           <div className='flex flex-col justify-center content-center'>
             <h1 className='text-2xl font-main self-center'>Hello {name}!</h1>
             <div className='text-xl mb-3'>
-              Search on artists or tracks to start curating a playlist fit for
-              all!
+              {toggleForm
+                ? 'Give your playlist a name!'
+                : 'Search for artists to start curating a playlist fit for all!'}
             </div>
-            <DebounceInput
-              minLength={2}
-              debounceTimeout={300}
-              onChange={handleInput}
-              className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg'
-            />
+            {toggleForm ? (
+              <input
+                type='text'
+                className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg'
+                onChange={(e) => setPlaylistName(e.target.value)}
+              />
+            ) : (
+              <DebounceInput
+                minLength={2}
+                debounceTimeout={300}
+                onChange={handleInput}
+                className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg'
+              />
+            )}
           </div>
         ) : (
           <></>
@@ -48,16 +59,28 @@ export const Hero = ({
       </div>
       {name ? (
         <div className='h-1/5'>
-          <SelectedArtists />
+          <SelectedArtists formState={toggleForm} />
         </div>
       ) : (
         <></>
       )}
       {name && state?.artists?.length ? (
         <div className='flex flex-col justify-end h-1/5'>
-          <button className='btn-green self-center' onClick={handleGenPlaylist}>
-            Generate Playlist
-          </button>
+          {!toggleForm ? (
+            <button
+              className='btn-green self-center'
+              onClick={() => setToggleForm(true)}
+            >
+              I've selected my artists!
+            </button>
+          ) : (
+            <button
+              className='btn-green self-center'
+              onClick={() => handleGenPlaylist(playlistName)}
+            >
+              Create my playlist!
+            </button>
+          )}
         </div>
       ) : (
         <></>

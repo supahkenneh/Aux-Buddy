@@ -1,4 +1,4 @@
-export const Artist = ({ artist, handleRemove }) => {
+export const Artist = ({ artist, handleRemove, formState }) => {
   return (
     <div className='mx-3'>
       <div
@@ -6,7 +6,7 @@ export const Artist = ({ artist, handleRemove }) => {
         onClick={handleRemove}
       >
         <div className='mx-2'>{artist.name}</div>
-        <div className='mx-2'>⛌</div>
+        {!formState ? <div className='mx-2'>⛌</div> : ''}
       </div>
     </div>
   );

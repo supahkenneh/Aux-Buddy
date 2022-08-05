@@ -44,29 +44,40 @@ function App() {
     setSearchData(data);
   };
 
-  const generatePlaylist = async () => {
-    const { data } = await composePlaylist(state.artists, profile.id);
-  }
+  const generatePlaylist = async (playlistName) => {
+    const response = await composePlaylist({
+      artists: state.artists,
+      user: profile.id,
+      playlistName: playlistName,
+    });
+    console.log(response);
+  };
 
   return (
     <div className='App h-screen bg-spotify-dark'>
       <ArtistListContext.Provider value={{ state, dispatch }}>
-        <Hero
-          name={profile && profile.display_name ? profile.display_name : null}
-          handleLogout={logout}
-          handleInput={fetchSearch}
-          handleGenPlaylist={generatePlaylist}
-        />
         {!token ? (
           ''
         ) : (
-          <div className='p-5 w-vw'>
-            <ArtistList
-              artists={searchData?.artists?.items}
-              handlePrev={() => paginate('prev')}
-              handleNext={() => paginate('next')}
+          <>
+            <Hero
+              name={
+                profile && profile.display_name ? profile.display_name : null
+              }
+              handleLogout={logout}
+              handleInput={fetchSearch}
+              handleGenPlaylist={(playlistName) =>
+                generatePlaylist(playlistName)
+              }
             />
-          </div>
+            <div className='p-5 w-vw'>
+              <ArtistList
+                artists={searchData?.artists?.items}
+                handlePrev={() => paginate('prev')}
+                handleNext={() => paginate('next')}
+              />
+            </div>
+          </>
         )}
       </ArtistListContext.Provider>
     </div>

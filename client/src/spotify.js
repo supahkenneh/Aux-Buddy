@@ -106,7 +106,7 @@ export const paginateFetch = async (searchUrl) => {
     return await axios.get(`${searchUrl}`);
 }
 
-export const composePlaylist = async (artists, user) => {
+export const composePlaylist = async ({ artists, user, playlistName }) => {
     // get tracks for selected artists
     const tracks = await Promise.all(
         artists.map(async (artist) => {
@@ -119,17 +119,18 @@ export const composePlaylist = async (artists, user) => {
         })
     )
     if (tracks?.length) {
-        console.log(tracks);
         // create playlist
         const { data } = await axios({
             method: 'post',
             url: `/users/${user}/playlists`,
             data: JSON.stringify({
-                name: 'test',
+                name: playlistName,
                 description: 'Created with Aux Buddy',
                 public: false
             })
         });
+
+        const playListLink = data?.external_urls?.spotify;
         // use playlist id to add tracks
         if (data?.id) {
             // get all uris
@@ -150,7 +151,9 @@ export const composePlaylist = async (artists, user) => {
                     uris: tracksUri.split(',')
                 })
             });
-            return response.data;
+            if (response) {
+                return playListLink;
+            }
         }
     }
 }
