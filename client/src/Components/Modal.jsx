@@ -26,11 +26,11 @@ export const Modal = ({ playlist, user }) => {
 
   return (
     <div className='fixed top-0 left-0 z-10 w-screen h-screen bg-spotify-dark/75 flex justify-center'>
-      <div className='bg-spotify-dark p-5 w-4/5 h-4/5 self-center rounded-lg drop-shadow-lg border-spotify-dark overflow-auto'>
+      <div className='bg-spotify-dark p-5 w-4/5 h-4/5 self-center rounded-lg drop-shadow-lg border-spotify-dark overflow-hidden'>
         <div className='h-1/8 flex justify-end text-xl'>
           <div className='hover:cursor-pointer'>⛌</div>
         </div>
-        <div className='flex'>
+        <div className='flex h-full'>
           <ModalHeader
             playlist={playlist}
             userProfile={user}

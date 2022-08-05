@@ -7,16 +7,20 @@ export const SongResults = ({ data, playlist, playlistChanged }) => {
     if (response) playlistChanged();
   };
   return (
-    <div className='pr-5'>
-      {data?.tracks?.items.map((track) => {
-        return (
-          <Track
-            key={track.id}
-            track={track}
-            handleAddSong={() => addSong(track)}
-          />
-        );
-      })}
+    <div className='pr-3 overflow-y-scroll h-full'>
+      {data ? (
+        data?.tracks?.items.map((track) => {
+          return (
+            <Track
+              key={track.id}
+              track={track}
+              handleAddSong={() => addSong(track)}
+            />
+          );
+        })
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
