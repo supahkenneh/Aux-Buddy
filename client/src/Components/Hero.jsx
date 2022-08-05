@@ -66,13 +66,14 @@ export const Hero = ({
       )}
       {name && state?.artists?.length ? (
         <div className='flex flex-col justify-end h-1/5'>
+          <button
+            className='btn-green self-center mb-2'
+            onClick={() => setToggleForm(!toggleForm)}
+          >
+            {!toggleForm ? "I've selected my artists!" : 'Take me back!'}
+          </button>
           {!toggleForm ? (
-            <button
-              className='btn-green self-center'
-              onClick={() => setToggleForm(true)}
-            >
-              I've selected my artists!
-            </button>
+            <></>
           ) : (
             <button
               className='btn-green self-center'
