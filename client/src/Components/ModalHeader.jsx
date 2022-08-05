@@ -14,8 +14,12 @@ export const ModalHeader = ({ playlist, userProfile, playlistChanged }) => {
     }
   };
 
+  const openPlaylist = () => {
+    window.open(playlist.external_urls.spotify, '_blank');
+  };
+
   return (
-    <div className='flex flex-col justify-center w-1/2 mr-3'>
+    <div className='flex flex-col justify-center w-1/2 mr-3 pb-2'>
       <div className='h-2/5 flex flex-col font-main mb-3'>
         <div className='py-2'>
           <h4 className='text-8xl'>{playlist.name}</h4>
@@ -34,7 +38,9 @@ export const ModalHeader = ({ playlist, userProfile, playlistChanged }) => {
               className='w-2/3 text-black text-lg font-sans drop-shadow-lg rounded p-2'
               placeholder='Search songs'
             />
-            <button className='btn-green ml-3'>Open</button>
+            <button className='btn-green ml-3' onClick={openPlaylist}>
+              Open
+            </button>
           </div>
         </div>
       </div>

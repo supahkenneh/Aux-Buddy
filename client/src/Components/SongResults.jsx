@@ -7,7 +7,7 @@ export const SongResults = ({ data, playlist, playlistChanged }) => {
     if (response) playlistChanged();
   };
   return (
-    <div className='pr-3 overflow-y-scroll h-full'>
+    <div className={`pr-3 ${data ? 'overflow-y-scroll' : ''} h-full`}>
       {data ? (
         data?.tracks?.items.map((track) => {
           return (

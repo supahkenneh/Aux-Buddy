@@ -51,7 +51,7 @@ function App() {
   };
 
   const generatePlaylist = async (playlistName) => {
-    if (!playlistName.length) playlistName = 'The Awesome Playlist';
+    if (!playlistName.length) playlistName = 'My Awesome Playlist';
 
     const response = await composePlaylist({
       artists: state.artists,
@@ -68,7 +68,15 @@ function App() {
           <Hero />
         ) : (
           <>
-            {playlist ? <Modal playlist={playlist} user={profile} /> : ''}
+            {playlist ? (
+              <Modal
+                playlist={playlist}
+                user={profile}
+                handleModal={() => setPlaylist('')}
+              />
+            ) : (
+              ''
+            )}
             <Hero
               name={
                 profile && profile.display_name ? profile.display_name : null

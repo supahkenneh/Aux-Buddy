@@ -7,7 +7,11 @@ export const ModalContent = ({ songs, playlistId, playlistChanged }) => {
     if (response) playlistChanged();
   };
   return (
-    <div className='flex flex-col w-1/2 h-full overflow-y-scroll pr-3'>
+    <div
+      className={`flex flex-col w-1/2 h-full ${
+        songs ? 'overflow-y-scroll' : ''
+      } pr-3`}
+    >
       {songs?.map((song) => {
         return (
           <Song
