@@ -3,7 +3,10 @@ export const ModalHeader = ({ playlist, userProfile }) => {
     <div className='flex flex-col justify-center h-1/2'>
       <div className='h-2/5 flex flex-col font-main '>
         <div className='mb-3'>
-          <h4 className='text-6xl'>Playlist Name</h4>
+          <h4 className='text-6xl'>{playlist.name}</h4>
+          <div className='font-sans'>
+            Created by: {userProfile.display_name}
+          </div>
           <div className='font-sans'>
             You can add or remove songs here. When you're ready just click 'Open
             Playlist' to start jamming!

@@ -2,14 +2,18 @@ import { ModalHeader } from './ModalHeader';
 import { ModalContent } from './ModalContent';
 import { getPlaylistSongs } from '../spotify';
 import { useEffect, useState } from 'react';
+import { catchErrors } from '../utils';
 
 export const Modal = ({ playlist, user }) => {
   const [songs, setSongs] = useState([]);
 
   useEffect(() => {
-    const response = async () => {
-      return await getPlaylistSongs(playlist.id);
+    const fetchPlaylistSongs = async () => {
+      const { data } = await getPlaylistSongs(playlist.id);
+      setSongs(data.tracks.items);
     };
+
+    catchErrors(fetchPlaylistSongs());
   }, [playlist.id]);
 
   return (

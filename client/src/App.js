@@ -22,14 +22,15 @@ function App() {
   const [playlist, setPlaylist] = useState('');
 
   useEffect(() => {
-    setToken(accessToken);
+    if (accessToken) {
+      setToken(accessToken);
+      const fetchData = async () => {
+        const { data } = await getCurrentUserProfile();
+        setProfile(data);
+      };
 
-    const fetchData = async () => {
-      const { data } = await getCurrentUserProfile();
-      setProfile(data);
-    };
-
-    catchErrors(fetchData());
+      catchErrors(fetchData());
+    }
   }, []);
 
   const fetchSearch = async (e) => {
@@ -64,10 +65,10 @@ function App() {
     <div className='App h-screen bg-spotify-dark'>
       <ArtistListContext.Provider value={{ state, dispatch }}>
         {!token ? (
-          ''
+          <Hero />
         ) : (
           <>
-            {!playlist ? <Modal playlist={playlist} user={profile} /> : ''}
+            {playlist ? <Modal playlist={playlist} user={profile} /> : ''}
             <Hero
               name={
                 profile && profile.display_name ? profile.display_name : null

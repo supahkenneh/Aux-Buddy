@@ -77,7 +77,6 @@ const getAccessToken = () => {
 
         return queryParams[LOCALSTORAGE_KEYS.accessToken];
     }
-
     return false;
 };
 
@@ -159,5 +158,8 @@ export const composePlaylist = async ({ artists, user, playlistName }) => {
 }
 
 export const getPlaylistSongs = async (id) => {
-
+    const queryParams = new URLSearchParams({
+        market: 'US'
+    })
+    return await axios.get(`/playlists/${id}?${queryParams}`);
 }
