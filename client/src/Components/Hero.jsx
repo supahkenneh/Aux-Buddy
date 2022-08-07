@@ -23,9 +23,7 @@ export const Hero = ({
               Logout
             </button>
           ) : (
-            <a className='btn-green' href='http://localhost:8888/login'>
-              Spotify Login
-            </a>
+            <></>
           )}
         </div>
       </div>
@@ -55,7 +53,17 @@ export const Hero = ({
             )}
           </div>
         ) : (
-          <></>
+          <div className='text-2xl flex flex-col justify-around text-center w-1/3 h-full'>
+            <div className='self-end'>
+              Powered by Spotify, with Aux Buddy, you can quickly create a
+              playlist with artists that you or your friends want to listen to!
+            </div>
+            <div className='w-full'>
+              <a className='btn-green px-10' href='http://localhost:8888/login'>
+                Login
+              </a>
+            </div>
+          </div>
         )}
       </div>
       {name ? (
@@ -84,7 +92,9 @@ export const Hero = ({
               setToggleForm(!toggleForm);
             }}
           >
-            {!toggleForm ? "I've selected my artists!" : 'I want to add more artists!'}
+            {!toggleForm
+              ? "I've selected my artists!"
+              : 'I want to edit my artists!'}
           </button>
         </div>
       ) : (
