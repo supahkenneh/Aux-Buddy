@@ -19,7 +19,7 @@ export const Card = ({ artist }) => {
 
   return (
     <div
-      className='bg-spotify-card font-main text-2xl flex rounded-lg drop-shadow-lg hover:cursor-pointer hover:underline'
+      className='bg-spotify-card font-main text-xl flex rounded-lg drop-shadow-lg hover:cursor-pointer hover:underline'
       onClick={() => addArtist(artist)}
     >
       <div className='w-1/2 flex justify-start'>
@@ -29,8 +29,8 @@ export const Card = ({ artist }) => {
           className='rounded-l-lg'
         />
       </div>
-      <div className='flex justify-center flex-col text-center'>
-        <div>{artist.name}</div>
+      <div className='flex justify-center text-center w-1/2'>
+        <div className='self-center'>{artist.name}</div>
       </div>
     </div>
   );
