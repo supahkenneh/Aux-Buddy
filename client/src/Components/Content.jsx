@@ -24,7 +24,7 @@ export const Content = ({ artists, handlePrev, handleNext }) => {
           <div></div>
         </div>
       ) : (
-        ''
+        <></>
       )}
     </>
   );
