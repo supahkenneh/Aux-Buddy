@@ -14,7 +14,10 @@ export const Footer = () => {
               rel='noreferrer'
               className='self-center w-6 h-6'
             >
-              <img src={contact.icon} alt={contact.label} />
+              <img
+                src={contact.icon}
+                alt={contact.label}
+              />
             </a>
           );
         })}
