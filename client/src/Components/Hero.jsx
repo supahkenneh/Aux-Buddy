@@ -14,7 +14,7 @@ export const Hero = ({
   const [playlistName, setPlaylistName] = useState('');
 
   return (
-    <header className='bg-gradient-to-r from-sky-500 to-indigo-500 h-1/2 p-4'>
+    <header className='bg-gradient-to-r from-sky-500 to-indigo-500 h-1/2 p-4 drop-shadow-lg'>
       <div className='flex w-vw drop-shadow-lg h-1/5'>
         <h1 className='text-5xl w-1/2 font-main self-center'>Aux Buddy</h1>
         <div className='self-center w-1/2 flex justify-end'>
@@ -55,8 +55,8 @@ export const Hero = ({
         ) : (
           <div className='text-2xl flex flex-col justify-around text-center w-1/3 h-full'>
             <div className='self-end'>
-              Powered by Spotify, with Aux Buddy, you can quickly create a
-              playlist with artists that you or your friends want to listen to!
+              Powered by Spotify, quickly create a playlist with artists that
+              you or your friends want to listen to!
             </div>
             <div className='w-full'>
               <a className='btn-green px-10' href='http://localhost:8888/login'>

@@ -12,6 +12,7 @@ import './App.css';
 import { Hero } from './Components/Hero';
 import { Content } from './Components/Content';
 import { Modal } from './Components/Modal';
+import { Footer } from './Components/Footer';
 import { ArtistListContext, initialState, reducer } from './context';
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
           </>
         )}
       </ArtistListContext.Provider>
+      <Footer />
     </div>
   );
 }
