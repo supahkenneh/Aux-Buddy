@@ -13,6 +13,7 @@ import { Hero } from './Components/Hero';
 import { Content } from './Components/Content';
 import { Modal } from './Components/Modal';
 import { Footer } from './Components/Footer';
+import { Loader } from './Components/Loader';
 import { ArtistListContext, initialState, reducer } from './context';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   const [searchData, setSearchData] = useState(null);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [playlist, setPlaylist] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (accessToken) {
@@ -53,6 +55,7 @@ function App() {
 
   const generatePlaylist = async (playlistName) => {
     if (!playlistName.length) playlistName = 'My Awesome Playlist';
+    setLoading(true);
 
     const response = await composePlaylist({
       artists: state.artists,
@@ -60,10 +63,12 @@ function App() {
       playlistName: playlistName,
     });
     setPlaylist(response);
+    setLoading(false);
   };
 
   return (
     <div className='App h-screen bg-spotify-dark'>
+      {loading ? <Loader /> : ''}
       <ArtistListContext.Provider value={{ state, dispatch }}>
         {!token ? (
           <Hero />

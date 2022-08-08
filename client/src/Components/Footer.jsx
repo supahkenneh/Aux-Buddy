@@ -12,7 +12,7 @@ export const Footer = () => {
               href={contact.link}
               target='_blank'
               rel='noreferrer'
-              className='self-center w-8 h-8'
+              className='self-center w-6 h-6'
             >
               <img src={contact.icon} alt={contact.label} />
             </a>

@@ -1,3 +1,49 @@
 body {
   color: white;
 }
+
+.load-container {
+  transform: rotateX(180deg);
+}
+
+.bar1,
+.bar2,
+.bar3,
+.bar4,
+.bar5 {
+  animation-name: dance;
+  animation-duration: 550ms;
+  animation-play-state: running;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.bar1 {
+  animation-delay: 250ms;
+}
+
+.bar2 {
+  animation-delay: 715ms;
+}
+
+.bar3 {
+  animation-delay: 475ms;
+}
+
+.bar4 {
+  animation-delay: 25ms;
+}
+
+.bar5 {
+  animation-delay: 190ms;
+}
+
+@keyframes dance {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 10px;
+  }
+}
