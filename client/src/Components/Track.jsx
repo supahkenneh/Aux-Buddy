@@ -5,11 +5,11 @@ const Track = ({ track, handleAddSong }) => {
 
   return (
     <div
-      className='font-sans flex border-b-2 py-2'
+      className='font-sans flex border-b-2 py-2 animate-fadein cursor-default'
       onMouseOver={() => setShowAdd(true)}
       onMouseLeave={() => setShowAdd(false)}
     >
-      <div className='flex flex-col w-11/12'>
+      <div className='flex flex-col w-11/12 hover:opacity-80'>
         <div className='text-md'>{track.name}</div>
         <div className='flex'>
           {track.artists.map((artist) => {

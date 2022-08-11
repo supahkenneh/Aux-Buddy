@@ -13,10 +13,10 @@ export const Content = ({ artists, handlePrev, handleNext }) => {
           <div></div>
           <div></div>
           <div className='flex justify-around'>
-            <div className='text-4xl hover:cursor-pointer' onClick={handlePrev}>
+            <div className='text-4xl hover:cursor-pointer hover:scale-125 transition-transform' onClick={handlePrev}>
               👈
             </div>
-            <div className='text-4xl hover:cursor-pointer' onClick={handleNext}>
+            <div className='text-4xl hover:cursor-pointer hover:scale-125 transition-transform' onClick={handleNext}>
               👉
             </div>
           </div>

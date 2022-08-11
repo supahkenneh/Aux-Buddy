@@ -19,17 +19,17 @@ export const Card = ({ artist }) => {
 
   return (
     <div
-      className='bg-spotify-card font-main text-xl flex rounded-lg drop-shadow-lg hover:cursor-pointer hover:underline'
+      className='bg-spotify-card font-main text-xl flex rounded-lg drop-shadow-lg hover:cursor-pointer hover:underline  hover:animate-wiggle'
       onClick={() => addArtist(artist)}
     >
-      <div className='w-1/2 flex justify-start'>
+      <div className='w-1/2 flex justify-start animate-fadein'>
         <img
           src={displayImg?.url ? displayImg.url : user}
           alt='artist-avatar'
           className='rounded-l-lg'
         />
       </div>
-      <div className='flex justify-center text-center w-1/2'>
+      <div className='flex justify-center text-center w-1/2 animate-fadein'>
         <div className='self-center'>{artist.name}</div>
       </div>
     </div>

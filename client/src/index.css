@@ -4,6 +4,6 @@
 
 @layer components {
   .btn-green {
-    @apply font-bold w-1/6 p-2 rounded-full text-center bg-spotify-green shadow-inner hover:bg-white hover:text-spotify-green drop-shadow-lg;
+    @apply font-bold w-1/6 p-2 rounded-full text-center bg-spotify-green shadow-inner hover:bg-white hover:text-spotify-green drop-shadow-lg hover:animate-wiggle;
   }
 }

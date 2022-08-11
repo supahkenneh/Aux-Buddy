@@ -35,7 +35,7 @@ export const ModalHeader = ({ playlist, userProfile, playlistChanged }) => {
               minLength={3}
               debounceTimeout={500}
               onChange={fetchSongs}
-              className='w-2/3 text-black text-lg font-sans drop-shadow-lg rounded p-2'
+              className='w-2/3 text-black text-lg font-sans drop-shadow-lg rounded p-2 focus:outline-cyan-500'
               placeholder='Search songs'
             />
             <button className='btn-green ml-3' onClick={openPlaylist}>

@@ -15,8 +15,10 @@ export const Hero = ({
 
   return (
     <header className='bg-gradient-to-r from-sky-500 to-indigo-500 h-1/2 p-4 drop-shadow-lg'>
-      <div className='flex w-vw h-1/5'>
-        <h1 className='text-5xl w-1/2 font-main self-center drop-shadow-lg'>Aux Buddy</h1>
+      <div className='flex w-vw h-1/5 animate-fadein'>
+        <h1 className='text-5xl w-1/2 font-main self-center drop-shadow-lg'>
+          Aux Buddy
+        </h1>
         <div className='self-center w-1/2 flex justify-end'>
           {name ? (
             <button onClick={handleLogout} className='btn-green'>
@@ -27,28 +29,38 @@ export const Hero = ({
           )}
         </div>
       </div>
-      <div className='flex justify-center h-2/5'>
+      <div className='flex justify-center h-2/5 animate-fadein'>
         {name ? (
           <div className='flex flex-col justify-center content-center w-1/3'>
-            <h1 className='text-2xl font-main self-center drop-shadow-lg'>Hello {name}!</h1>
-            <div className='text-xl mb-3 self-center drop-shadow-lg'>
+            <h1 className='text-2xl font-main self-center drop-shadow-lg'>
+              Hello {name}!
+            </h1>
+            <div className='text-xl mb-3 self-center drop-shadow-lg animate-fadein'>
               {toggleForm
                 ? 'Give your playlist a name!'
                 : 'Search for artists to start curating a playlist fit for all!'}
             </div>
             {toggleForm ? (
-              <input
-                type='text'
-                className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg'
-                placeholder='The Awesome Playlist'
-                onChange={(e) => setPlaylistName(e.target.value)}
-              />
+              <>
+                <input
+                  type='text'
+                  className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg focus:outline-indigo-500'
+                  placeholder='The Awesome Playlist'
+                  onChange={(e) => setPlaylistName(e.target.value)}
+                />
+                <button
+                  className='btn-green self-center my-2 w-1/2'
+                  onClick={() => handleGenPlaylist(playlistName)}
+                >
+                  Create my playlist!
+                </button>
+              </>
             ) : (
               <DebounceInput
                 minLength={2}
                 debounceTimeout={300}
                 onChange={handleInput}
-                className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg'
+                className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg focus:outline-cyan-500'
               />
             )}
           </div>
@@ -74,17 +86,7 @@ export const Hero = ({
         <></>
       )}
       {name && state?.artists?.length ? (
-        <div className='flex flex-col justify-end h-1/5'>
-          {!toggleForm ? (
-            <></>
-          ) : (
-            <button
-              className='btn-green self-center mb-2'
-              onClick={() => handleGenPlaylist(playlistName)}
-            >
-              Create my playlist!
-            </button>
-          )}
+        <div className='flex flex-col justify-end h-1/5 animate-fadein'>
           <button
             className='btn-green self-center'
             onClick={() => {

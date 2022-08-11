@@ -4,15 +4,15 @@ export const Song = ({ song, handleRemoveSong }) => {
   const [showRemove, setShowRemove] = useState(false);
   return (
     <div
-      className='py-2 border-b-2 flex justify-start'
+      className='py-2 border-b-2 flex justify-start hover:opacity-50 cursor-default'
       onMouseOver={() => setShowRemove(true)}
       onMouseLeave={() => setShowRemove(false)}
     >
-      <div className='w-1/12'>
+      <div className='w-1/12 flex'>
         <img
           src={song.album.images[2].url}
           alt='album_cover'
-          className='mr-5'
+          className='mr-5 self-center'
         />
       </div>
       <div className='flex flex-col justify-end w-8/12 pl-5'>
