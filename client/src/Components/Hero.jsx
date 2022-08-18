@@ -54,6 +54,7 @@ export const Hero = ({
                 minLength={2}
                 debounceTimeout={300}
                 onChange={handleInput}
+                placeholder='Artist Name'
                 className='text-black rounded h-1/4 text-lg p-2 font-sans drop-shadow-lg focus:outline-cyan-500'
               />
             )}
