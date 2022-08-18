@@ -48,12 +48,6 @@ export const Hero = ({
                   placeholder='The Awesome Playlist'
                   onChange={(e) => setPlaylistName(e.target.value)}
                 />
-                <button
-                  className='btn-green self-center my-2 w-1/2'
-                  onClick={() => handleGenPlaylist(playlistName)}
-                >
-                  Create my playlist!
-                </button>
               </>
             ) : (
               <DebounceInput
@@ -87,17 +81,35 @@ export const Hero = ({
       )}
       {name && state?.artists?.length ? (
         <div className='flex flex-col justify-end h-1/5 animate-fadein'>
-          <button
-            className='btn-green self-center'
-            onClick={() => {
-              handleInput(null);
-              setToggleForm(!toggleForm);
-            }}
-          >
-            {!toggleForm
-              ? "I've selected my artists!"
-              : 'I want to edit my artists!'}
-          </button>
+          {!toggleForm ? (
+            <button
+              className='btn-green self-center'
+              onClick={() => {
+                handleInput(null);
+                setToggleForm(!toggleForm);
+              }}
+            >
+              I've selected my artists!
+            </button>
+          ) : (
+            <>
+              <button
+                className='btn-green self-center my-2'
+                onClick={() => handleGenPlaylist(playlistName)}
+              >
+                Create my playlist!
+              </button>
+              <button
+                className='self-center underline'
+                onClick={() => {
+                  handleInput(null);
+                  setToggleForm(!toggleForm);
+                }}
+              >
+                I want to edit my artists!
+              </button>
+            </>
+          )}
         </div>
       ) : (
         <></>
