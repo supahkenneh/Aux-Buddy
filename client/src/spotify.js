@@ -157,6 +157,7 @@ export const composePlaylist = async ({ artists, user, playlistName }) => {
     }
 }
 
+// get all songs in playlist
 export const getPlaylistSongs = async (id) => {
     const queryParams = new URLSearchParams({
         market: 'US'
@@ -164,6 +165,7 @@ export const getPlaylistSongs = async (id) => {
     return await axios.get(`/playlists/${id}?${queryParams}`);
 }
 
+// remove song from playlist
 export const removeSongFromPlaylist = async (playlistId, track) => {
     return await axios({
         method: 'delete',
@@ -174,6 +176,7 @@ export const removeSongFromPlaylist = async (playlistId, track) => {
     });
 }
 
+// add song to playlist
 export const addSongToPlaylist = async (playlistId, track) => {
     const queryParams = new URLSearchParams({
         uris: track.uri,
