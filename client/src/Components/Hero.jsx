@@ -12,6 +12,10 @@ export const Hero = ({
   const { state } = useContext(ArtistListContext);
   const [toggleForm, setToggleForm] = useState(false);
   const [playlistName, setPlaylistName] = useState('');
+  const LOGIN_URI =
+    process.env.NODE_ENV !== 'production'
+      ? 'http://localhost:8888/login'
+      : 'https://aux-buddy.herokuapp.com/login';
 
   return (
     <header className='bg-gradient-to-r from-sky-500 to-indigo-500 h-1/2 p-4 drop-shadow-lg'>
@@ -66,7 +70,7 @@ export const Hero = ({
               you or your friends want to listen to!
             </div>
             <div className='w-full'>
-              <a className='btn-green px-10' href='http://localhost:8888/login'>
+              <a className='btn-green px-10' href={LOGIN_URI}>
                 Login
               </a>
             </div>

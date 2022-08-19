@@ -4,13 +4,18 @@ const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const path = require('path');
 
 /* Environment variables */
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+const FRONTEND_URI = process.env.FRONTEND_URI;
+const PORT = process.env.PORT || 8888;
 
 const stateKey = 'spotify_auth_state';
+
+app.use(express.static(path.resolve(__dirname, './client/build')))
 
 app.use(cors());
 
@@ -18,7 +23,6 @@ app.get('/', (req, res) => {
     res.send('hello world');
 });
 
-// https://api.spotify.com
 app.get('/login', (req, res) => {
     // set cookie 
     const state = generateRandomString(16);
@@ -62,18 +66,7 @@ app.get('/callback', (req, res) => {
                 });
 
                 // redirect to react app
-                res.redirect(`http://localhost:3000/?${queryParams}`);
-                // axios.get('https://api.spotify.com/v1/me', {
-                //     headers: {
-                //         Authorization: `${token_type} ${access_token}`
-                //     }
-                // })
-                //     .then(response => {
-                //         res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`)
-                //     })
-                //     .catch(error => {
-                //         res.send(error);
-                //     })
+                res.redirect(`${FRONTEND_URI}?${queryParams}`);
             } else {
                 res.redirect(`/?${new URLSearchParams({ error: 'invalid_token' })}`);
             }
@@ -105,8 +98,10 @@ app.get('/refresh_token', (req, res) => {
         })
 });
 
-const port = process.env.PORT || 8888;
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
+})
 
-app.listen(port, () => {
-    console.log(`Server listening on port: ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server listening on port: ${PORT}`);
 })
